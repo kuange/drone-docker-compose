@@ -8,16 +8,14 @@ services:
       - '80:80'
       - '443:443'
     environment:
-      DRONE_AGENTS_ENABLED=true
-      DRONE_GITHUB_SERVER=https://github.com
-      DRONE_GITHUB_CLIENT_ID=fc10bde9367cf04f503b
-      DRONE_GITHUB_CLIENT_SECRET=6880aace7103e9dbdf9e2054d9fe70a4dc74919b
-      DRONE_RPC_SECRET=9e311c3eb8ef61b0030d1eb2813fb057
-      DRONE_SERVER_HOST=drone.prous.cn
-      DRONE_SERVER_PROTO=http
+      - DRONE_AGENTS_ENABLED=true
+      - DRONE_GITHUB_SERVER=https://github.com
+      - DRONE_GITHUB_CLIENT_ID=fc10bde9367cf04f503b
+      - DRONE_GITHUB_CLIENT_SECRET=6880aace7103e9dbdf9e2054d9fe70a4dc74919b
+      - DRONE_RPC_SECRET=9e311c3eb8ef61b0030d1eb2813fb057
+      - DRONE_SERVER_HOST=drone.prous.cn
+      - DRONE_SERVER_PROTO=http
     volumes:
-      # 挂载 docker
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
-      # 挂载目录存储数据
       - /data/drone:/data
