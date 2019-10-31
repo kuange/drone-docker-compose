@@ -11,22 +11,13 @@ services:
       - ./data/nginx/conf.d:/etc/nginx/conf.d
       - ./data/nginx/log:/var/log/nginx
 
-  gitea:
-    container_name: gitea
-    image: gitea/gitea:latest
-    ports:
-      - '10022:22'
-      - '10080:3000'
-    volumes:
-      - ./data/gitea:/data
-
   drone-server:
     container_name: drone-server
     image: drone/drone:1
     restart: always
     ports:
-      - '80:80'
-      - '443:443'
+      - '10080:80'
+      - '10443:443'
     environment:
       - DRONE_DEBUG=true
       - DRONE_AGENTS_ENABLED=true
