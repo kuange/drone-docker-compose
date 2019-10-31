@@ -6,13 +6,20 @@
 version: '2'
 
 services:
+  nginx:
+    container_name: nginx
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/log:/var/log/nginx
+
   drone-server:
     container_name: drone-server
     image: drone/drone:1
     restart: always
-    ports:
-      - '80:80'
-      - '443:443'
     environment:
       - DRONE_DEBUG=true
       - DRONE_AGENTS_ENABLED=true
@@ -24,7 +31,8 @@ services:
       - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
       - DRONE_LOGS_TRACE=true
     volumes:
-      - /data/drone:/data
+      - ./data/drone:/data
+
   drone-agent:
     container_name: drone-agent
     image: drone/agent:1
