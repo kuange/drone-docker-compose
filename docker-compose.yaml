@@ -2,7 +2,7 @@ version: '2'
 
 services:
   drone-server:
-    container_name: drone_server
+    container_name: drone-server
     image: drone/drone:1
     restart: always
     ports:
@@ -20,8 +20,8 @@ services:
       - DRONE_LOGS_TRACE=true
     volumes:
       - /data/drone:/data
-  agent:
-    container_name: agent
+  drone-agent:
+    container_name: drone-agent
     image: drone/agent:1
     restart: always
     depends_on:
