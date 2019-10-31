@@ -1,25 +1,11 @@
+## Github
+
+> docker-compose.yml
+
+```yml
 version: '2'
 
 services:
-  nginx:
-    container_name: nginx
-    image: nginx/nginx:latest
-    port:
-      - 80:80
-      - 443:443
-    volumes:
-      - ./data/nginx/conf.d:/etc/nginx/conf.d
-      - ./data/nginx/log:/var/log/nginx
-
-  gitea:
-    container_name: gitea
-    image: gitea/gitea:latest
-    ports:
-      - '10022:22'
-      - '10080:3000'
-    volumes:
-      - ./data/gitea:/data
-
   drone-server:
     container_name: drone-server
     image: drone/drone:1
@@ -38,8 +24,7 @@ services:
       - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
       - DRONE_LOGS_TRACE=true
     volumes:
-      - ./data/drone:/data
-
+      - /data/drone:/data
   drone-agent:
     container_name: drone-agent
     image: drone/agent:1
@@ -56,3 +41,22 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/local/bin/docker:/usr/local/bin/docker
+```
+
+> .env
+
+```.env
+# Github
+DRONE_GITHUB_SERVER=https://github.com
+DRONE_GITHUB_CLIENT_ID=fc10bde9367cf04f503b
+DRONE_GITHUB_CLIENT_SECRET=6880aace7103e9dbdf9e2054d9fe70a4dc74919b
+DRONE_SERVER_HOST=drone.prous.cn
+
+# Gitea
+DRONE_GITEA_SERVER=gitea
+DRONE_GITEA_CLIENT_ID=
+DRONE_GITEA_CLIENT_SECRET=
+
+# 统一密钥
+DRONE_RPC_SECRET=9e311c3eb8ef61b0030d1eb2813fb057
+```
