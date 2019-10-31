@@ -15,9 +15,6 @@ services:
     container_name: drone-server
     image: drone/drone:1
     restart: always
-    ports:
-      - '10080:80'
-      - '10443:443'
     environment:
       - DRONE_DEBUG=true
       - DRONE_AGENTS_ENABLED=true
