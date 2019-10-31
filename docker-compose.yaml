@@ -8,6 +8,7 @@ services:
     ports:
       - '80:80'
       - '443:443'
+      - "8080"
     environment:
       - DRONE_DEBUG=true
       - DRONE_AGENTS_ENABLED=true
