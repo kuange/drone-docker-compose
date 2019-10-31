@@ -4,9 +4,9 @@ services:
   nginx:
     container_name: nginx
     image: nginx/nginx:latest
-    port:
-      - 80:80
-      - 443:443
+    ports:
+      - "80:80"
+      - "443:443"
     volumes:
       - ./data/nginx/conf.d:/etc/nginx/conf.d
       - ./data/nginx/log:/var/log/nginx
