@@ -11,6 +11,28 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
 
+  gitea:
+    image: gitea/gitea:latest
+    volumes:
+      - ./data/gitea:/data
+    ports:
+      - "80:3000"
+      - "22:22"
+    depends_on:
+      - gitea-db
+    restart: always
+
+  gitea-db:
+    image: mariadb:10
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=changeme
+      - MYSQL_DATABASE=gitea
+      - MYSQL_USER=gitea
+      - MYSQL_PASSWORD=changeme
+    volumes:
+      - ./data/gitea/db/:/var/lib/mysql
+
   drone-server:
     container_name: drone-server
     image: drone/drone:1
