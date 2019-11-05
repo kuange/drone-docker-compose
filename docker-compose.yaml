@@ -4,6 +4,12 @@ services:
   nginx:
     container_name: nginx
     image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - gitea
+      - drone-server
     volumes:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/log:/var/log/nginx
@@ -12,8 +18,9 @@ services:
     image: gitea/gitea:latest
     volumes:
       - ./data/gitea:/data
-      - ./gitea/app.ini:/data/gitea//conf/app.ini
+      - ./gitea/app.ini:/data/gitea/conf/app.ini
     ports:
+      - "3000:3000"
       - "10022:22"
     depends_on:
       - gitea-db
