@@ -18,7 +18,7 @@ services:
     image: gitea/gitea:latest
     volumes:
       - ./data/gitea:/data
-      - ./gitea/app.ini:/data/gitea/conf/app.ini
+      - ./gitea/conf/app.ini:/data/gitea/conf/app.ini
     ports:
       - "3000:3000"
       - "10022:22"
